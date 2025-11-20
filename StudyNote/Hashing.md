@@ -1,15 +1,15 @@
 # Hash Table
 
-## Definition
+### Definition
 
-## Visualization
+### Visualization
 
-## Characteristics
+### Characteristics
 
-## Time/Space Complexity
+### Time/Space Complexity
 
-## Limitations
+### Limitations
 
-## Pros/Cons
+### Pros/Cons
 
-## Use Cases
+### Use Cases
