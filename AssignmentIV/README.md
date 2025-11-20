@@ -4,23 +4,32 @@ This assignment focuses on the design and observation of hash functions using C/
 Students are expected to implement and analyze the behavior of hash functions, 
 evaluate their efficiency, and understand their applications in computer science.
 
-Developer: [王芷芸]
-Email: [s1131547@mail.yzu.edu.tw]
+Developer: 王芷芸
+Email: s1131547@mail.yzu.edu.tw
 
 ## My Hash Function
 ### Integer Keys 
 - Formula / pseudocode:
-  ```text
-  [Your implementation here]
+  ```c
+  if (m <= 0) return 0;
+  return key % m;
   ```
-- Rationale: [Explain your design choices and how they minimize collisions.]
+- Rationale:  I used the basic Division Method. This is the most fundamental hashing technique where the key is divided by the table size m, and the remainder is used as the index. The uniformity depends on the table size m.
 
 ### Non-integer Keys
 - Formula / pseudocode:
-  ```text
-  [Your implementation here]
+  ```c
+  if (m <= 0 || str == NULL || *str == '\0') {
+    return 0;
+  }
+  unsigned long hash = 0;
+  while (*str != '\0') {
+    hash = hash * 31 + (unsigned char)(*str);
+    str++;
+  }
+  return (int)(hash % m);
   ```
-- Rationale: [Explain your approach and its effectiveness for non-integer keys.]
+- Rationale: I implemented the Polynomial Rolling Hash using P = 31. I used a while loop to iterate through the string pointer. This method minimizes collisions by considering the position of each character.
 
 ## Experimental Setup
 - Table sizes tested (m): 10, 11, 37
@@ -70,7 +79,7 @@ Email: [s1131547@mail.yzu.edu.tw]
   ```
 
 ### Result Snapshot
-- Example output for integers:
+- Output for integers:
   ```
   === Hash Function Observation (C Version) ===
 
@@ -79,68 +88,235 @@ Email: [s1131547@mail.yzu.edu.tw]
   -----------------
   21      1
   22      2
-  ...
+  23      3
+  24      4
+  25      5
+  26      6
+  27      7
+  28      8
+  29      9
+  30      0
+  51      1
+  52      2
+  53      3
+  54      4
+  55      5
+  56      6
+  57      7
+  58      8
+  59      9
+  60      0
 
   === Table Size m = 11 ===
   Key     Index
   -----------------
   21      10
   22      0
-  ...
+  23      1
+  24      2
+  25      3
+  26      4
+  27      5
+  28      6
+  29      7
+  30      8
+  51      7
+  52      8
+  53      9
+  54      10
+  55      0
+  56      1
+  57      2
+  58      3
+  59      4
+  60      5
 
   === Table Size m = 37 ===
   Key     Index
   -----------------
   21      21
   22      22
-  ...
+  23      23
+  24      24
+  25      25
+  26      26
+  27      27
+  28      28
+  29      29
+  30      30
+  51      14
+  52      15
+  53      16
+  54      17
+  55      18
+  56      19
+  57      20
+  58      21
+  59      22
+  60      23
+
+  === String Hash (m = 10) ===
+  Key     Index
+  -----------------
+  cat     2
+  dog     4
+  bat     1
+  cow     9
+  ant     3
+  owl     8
+  bee     0
+  hen     5
+  pig     0
+  fox     3
+
+  === String Hash (m = 11) ===
+  Key     Index
+  -----------------
+  cat     10
+  dog     6
+  bat     6
+  cow     7
+  ant     9
+  owl     6
+  bee     5
+  hen     5
+  pig     0
+  fox     9
+
+  === String Hash (m = 37) ===
+  Key     Index
+  -----------------
+  cat     27
+  dog     3
+  bat     28
+  cow     20
+  ant     25
+  owl     23
+  bee     26
+  hen     29
+  pig     27
+  fox     18
 
   === Hash Function Observation (C++ Version) ===
-
   === Table Size m = 10 ===
   Key     Index
   -----------------
   21      1
   22      2
-  ...
+  23      3
+  24      4
+  25      5
+  26      6
+  27      7
+  28      8
+  29      9
+  30      0
+  51      1
+  52      2
+  53      3
+  54      4
+  55      5
+  56      6
+  57      7
+  58      8
+  59      9
+  60      0
 
   === Table Size m = 11 ===
   Key     Index
   -----------------
   21      10
   22      0
-  ...
+  23      1
+  24      2
+  25      3
+  26      4
+  27      5
+  28      6
+  29      7
+  30      8
+  51      7
+  52      8
+  53      9
+  54      10
+  55      0
+  56      1
+  57      2
+  58      3
+  59      4
+  60      5
 
   === Table Size m = 37 ===
   Key     Index
   -----------------
   21      21
   22      22
-  ...
-  ```
+  23      23
+  24      24
+  25      25
+  26      26
+  27      27
+  28      28
+  29      29
+  30      30
+  51      14
+  52      15
+  53      16
+  54      17
+  55      18
+  56      19
+  57      20
+  58      21
+  59      22
+  60      23
 
-- Example output for strings:
-  ```
   === String Hash (m = 10) ===
   Key     Index
   -----------------
-  cat     0
-  dog     0
-  ...
+  cat     2
+  dog     4
+  bat     1
+  cow     9
+  ant     3
+  owl     8
+  bee     0
+  hen     5
+  pig     0
+  fox     3
 
   === String Hash (m = 11) ===
   Key     Index
   -----------------
-  cat     0
-  dog     0
-  ...
+  cat     10
+  dog     6
+  bat     6
+  cow     7
+  ant     9
+  owl     6
+  bee     5
+  hen     5
+  pig     0
+  fox     9
 
   === String Hash (m = 37) ===
   Key     Index
   -----------------
-  cat     0
-  dog     0
-  ...
+  cat     27
+  Key     Index
+  -----------------
+  Key     Index
+  Key     Index
+  -----------------
+  cat     27
+  dog     3
+  bat     28
+  cow     20
+  ant     25
+  owl     23
+  bee     26
+  hen     29
+  pig     27
+  fox     18
   ```
 
 - Observations: Outputs align with the analysis, showing better distribution with prime table sizes.
