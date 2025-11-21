@@ -57,7 +57,7 @@ Assembler messages:
 Fatal error: can't create C:\Users\芷芸\...
 ```
 **Solution:**
- The compiler failed to handle the temporary path with Chinese characters. I fixed this by redirecting the temporary directory to a simple ASCII path (C:\tmp).
+ The compiler failed to handle the temporary path with Chinese characters. I fixed this by redirecting the temporary directory to a simple ASCII path (`C:\tmp`).
 
 **Steps taken in Terminal:**
   - Create a temp folder: `mkdir C:\tmp` 
