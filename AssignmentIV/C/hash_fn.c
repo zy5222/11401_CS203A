@@ -8,14 +8,14 @@
 
    Development History:
     - 2025/11/11: Initial implementation
+    - 2025/11/21: Implemented Division and Rolling Hash functions
 
-   Developer: Yu-Feng Huang <yfhuang@saturn.yzu.edu.tw>
+   Developer: 王芷芸 <s1131547@mail.yzu.edu.tw>
  */
 #include <stdio.h>
 #include <string.h>
 
 int myHashInt(int key, int m) {
-    // TODO: replace with your own design
     if(m <= 0){
         return 0;
     }
@@ -24,7 +24,6 @@ int myHashInt(int key, int m) {
 
 int myHashString(const char* str, int m) {
     unsigned long hash = 0;
-    // TODO: replace with your own design
     if(m <= 0 || str == NULL || *str == '\0'){
         return 0;
     }
