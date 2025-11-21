@@ -55,16 +55,20 @@ During compilation, I encountered the following error because my Windows usernam
 ```text
 Assembler messages:
 Fatal error: can't create C:\Users\芷芸\...
-
+```
 **Solution:**
  The compiler failed to handle the temporary path with Chinese characters. I fixed this by redirecting the temporary directory to a simple ASCII path (C:\tmp).
 
 **Steps taken in Terminal:**
-1.Create a temp folder: mkdir C:\tmp
-2.Set environment variables before compiling:
+  - Create a temp folder: `mkdir C:\tmp` 
+  - Set environment variables before compiling:
+```text
 $env:TMP = "C:\tmp"
 $env:TEMP = "C:\tmp"
-3. Manual Compilation
+```
+### 3. Manual Compilation
 To ensure the correct compiler was used, I used the absolute path for compilation:
+```text
 & "C:\msys64\ucrt64\bin\gcc.exe" C/main.c C/hash_fn.c -o hash_function
 & "C:\msys64\ucrt64\bin\g++.exe" CXX/main.cpp CXX/hash_fn.cpp -o hash_function_cpp
+```
