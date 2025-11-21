@@ -42,3 +42,29 @@ Before you begin, ensure you have the following:
 - Enable GitLens extension for enhanced Git insights.
 
 By following these steps, you can easily connect and manage your GitHub repositories using Visual Studio Code.
+
+## My Setup Experience & Troubleshooting
+
+### 1. Compiler Environment Setup (MinGW)
+I installed **MSYS2 (MinGW-w64)** to allow VS Code to compile C/C++ code.
+- **Path Configuration**: I verified that `C:\msys64\ucrt64\bin` was added to the Windows System Environment Variables (**Path**) so that `make` and `gcc` commands could be recognized.
+
+### 2. Issue with Chinese Username (Fatal Error)
+**Problem:**
+During compilation, I encountered the following error because my Windows username contains non-ASCII (Chinese) characters:
+```text
+Assembler messages:
+Fatal error: can't create C:\Users\芷芸\...
+
+**Solution:**
+ The compiler failed to handle the temporary path with Chinese characters. I fixed this by redirecting the temporary directory to a simple ASCII path (C:\tmp).
+
+**Steps taken in Terminal:**
+1.Create a temp folder: mkdir C:\tmp
+2.Set environment variables before compiling:
+$env:TMP = "C:\tmp"
+$env:TEMP = "C:\tmp"
+3. Manual Compilation
+To ensure the correct compiler was used, I used the absolute path for compilation:
+& "C:\msys64\ucrt64\bin\gcc.exe" C/main.c C/hash_fn.c -o hash_function
+& "C:\msys64\ucrt64\bin\g++.exe" CXX/main.cpp CXX/hash_fn.cpp -o hash_function_cpp
