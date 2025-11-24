@@ -5,8 +5,16 @@ Students are expected to implement and analyze the behavior of hash functions,
 evaluate their efficiency, and understand their applications in computer science.
 
 Developer: 王芷芸
+
 Email: s1131547@mail.yzu.edu.tw
 
+## Development Platform
+
+OS: Windows 11
+
+Toolchain: MinGW-w64 (MSYS2)
+
+IDE: VS Code
 ## My Hash Function
 ### Integer Keys 
 - Formula / pseudocode:
@@ -299,12 +307,6 @@ Email: s1131547@mail.yzu.edu.tw
   fox     9
 
   === String Hash (m = 37) ===
-  Key     Index
-  -----------------
-  cat     27
-  Key     Index
-  -----------------
-  Key     Index
   Key     Index
   -----------------
   cat     27
