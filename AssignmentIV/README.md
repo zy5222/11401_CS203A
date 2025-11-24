@@ -5,6 +5,7 @@ Students are expected to implement and analyze the behavior of hash functions,
 evaluate their efficiency, and understand their applications in computer science.
 
 Developer: 王芷芸
+
 Email: s1131547@mail.yzu.edu.tw
 
 ## My Hash Function
@@ -198,6 +199,7 @@ Email: s1131547@mail.yzu.edu.tw
   fox     18
 
   === Hash Function Observation (C++ Version) ===
+
   === Table Size m = 10 ===
   Key     Index
   -----------------
@@ -302,12 +304,6 @@ Email: s1131547@mail.yzu.edu.tw
   Key     Index
   -----------------
   cat     27
-  Key     Index
-  -----------------
-  Key     Index
-  Key     Index
-  -----------------
-  cat     27
   dog     3
   bat     28
   cow     20
@@ -318,21 +314,26 @@ Email: s1131547@mail.yzu.edu.tw
   pig     27
   fox     18
   ```
+- Observations: 
+  1. **m=10 (High Pattern Correlation):** The index sequence `1, 2, 3...0` repeats perfectly for both the 20s and 50s range. This confirms that `key % 10` simply extracts the last digit, causing 100% collision for inputs with the same ending digit (e.g., 21 and 51).
+  2. **m=11 & 37 (Pattern Breaking):** Using a prime number successfully breaks this pattern. For `m=11`, 21 maps to 10 while 51 maps to 7, showing distinct indices. `m=37` offers the widest distribution with no collisions in this dataset.
 
-- Observations: Outputs align with the analysis, showing better distribution with prime table sizes.
-- Example output for integers:
+- Output for integers:
   ```
-  Hash table (m=10): [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-  Hash table (m=11): [10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  Hash table (m=37): [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, ...]
+  Hash table (m=10): [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+  Hash table (m=11): [10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 7, 8, 9, 10, 0, 1, 2, 3, 4, 5]
+  Hash table (m=37): [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
   ```
-- Example output for strings:
+- Output for strings:
   ```
-  Hash table (m=10): ["cat", "dog", "bat", "cow", "ant", ...]
-  Hash table (m=11): ["fox", "cat", "dog", "bat", "cow", ...]
-  Hash table (m=37): ["bee", "hen", "pig", "fox", "cat", ...]
+  Hash table (m=10): ["bee", "pig", "bat", "cat", "ant", "fox", "dog", "hen", "owl", "cow"]
+  Hash table (m=11): ["pig", "bee", "hen", "dog", "bat", "owl", "cow", "ant", "fox", "cat"]
+  Hash table (m=37): ["dog", "fox", "cow", "owl", "ant", "bee", "cat", "pig", "bat", "hen"]
   ```
-- Observations: Outputs align with the analysis, showing better distribution with prime table sizes.
+- Observations:
+  1. **m=10:** Collisions occurred at indices 0 (`bee`, `pig`) and 3 (`ant`, `fox`), showing that a non-prime small table struggles to separate keys.
+  2. **m=11:** Unexpectedly high collision rate. `dog`, `bat`, and `owl` all clustered at index 6. This demonstrates that a small prime number doesn't guarantee zero collisions if the specific keys and hash algorithm align unfortunately.
+  3. **m=37:** Significant improvement in distribution. Most keys are spread out (indices 3, 18, 20...), though a single collision remained (`cat` and `pig` both map to 27), which is normal for hash functions without collision resolution.
 
 ## Analysis
 - Prime vs non-prime `m`: Prime table sizes generally result in better distribution and fewer collisions.
