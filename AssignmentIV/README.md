@@ -48,11 +48,11 @@ IDE: VS Code
 - Standard: C23 and C++23
 
 ## Results
-| Table Size (m) | Index Sequence         | Observation              |
-|----------------|------------------------|--------------------------|
-| 10             | 1, 2, 3, 4, ...        | Pattern repeats every 10 |
-| 11             | 10, 0, 1, 2, ...       | More uniform             |
-| 37             | 20, 21, 22, 23, ...    | Near-uniform             |
+| Table Size (m) | Index Sequence                                                                | Observation              |
+|----------------|-------------------------------------------------------------------------------|--------------------------|
+| 10             | 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0                    | Pattern repeats every 10 |
+| 11             | 10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 7, 8, 9, 10, 0, 1, 2, 3, 4, 5                  | More uniform             |
+| 37             | 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23| Near-uniform             |
 
 ## Compilation, Build, Execution, and Output
 
@@ -172,48 +172,6 @@ IDE: VS Code
   59      22
   60      23
 
-  === String Hash (m = 10) ===
-  Key     Index
-  -----------------
-  cat     2
-  dog     4
-  bat     1
-  cow     9
-  ant     3
-  owl     8
-  bee     0
-  hen     5
-  pig     0
-  fox     3
-
-  === String Hash (m = 11) ===
-  Key     Index
-  -----------------
-  cat     10
-  dog     6
-  bat     6
-  cow     7
-  ant     9
-  owl     6
-  bee     5
-  hen     5
-  pig     0
-  fox     9
-
-  === String Hash (m = 37) ===
-  Key     Index
-  -----------------
-  cat     27
-  dog     3
-  bat     28
-  cow     20
-  ant     25
-  owl     23
-  bee     26
-  hen     29
-  pig     27
-  fox     18
-
   === Hash Function Observation (C++ Version) ===
 
   === Table Size m = 10 ===
@@ -287,7 +245,10 @@ IDE: VS Code
   58      21
   59      22
   60      23
+  ```
 
+- Output for strings:
+  ```
   === String Hash (m = 10) ===
   Key     Index
   -----------------
@@ -301,6 +262,8 @@ IDE: VS Code
   hen     5
   pig     0
   fox     3
+
+   Output for strings:
 
   === String Hash (m = 11) ===
   Key     Index
@@ -331,8 +294,8 @@ IDE: VS Code
   fox     18
   ```
 - Observations: 
-  1. **m=10 (High Pattern Correlation):** The index sequence `1, 2, 3...0` repeats perfectly for both the 20s and 50s range. This confirms that `key % 10` simply extracts the last digit, causing 100% collision for inputs with the same ending digit (e.g., 21 and 51).
-  2. **m=11 & 37 (Pattern Breaking):** Using a prime number successfully breaks this pattern. For `m=11`, 21 maps to 10 while 51 maps to 7, showing distinct indices. `m=37` offers the widest distribution with no collisions in this dataset.
+  1. m=10 (High Pattern Correlation): The index sequence `1, 2, 3...0` repeats perfectly for both the 20s and 50s range. This confirms that `key % 10` simply extracts the last digit, causing 100% collision for inputs with the same ending digit (e.g., 21 and 51).
+  2. m=11 & 37 (Pattern Breaking): Using a prime number successfully breaks this pattern. For `m=11`, 21 maps to 10 while 51 maps to 7, showing distinct indices. `m=37` offers the widest distribution with no collisions in this dataset.
 
 - Output for integers:
   ```
@@ -347,16 +310,22 @@ IDE: VS Code
   Hash table (m=37): ["dog", "fox", "cow", "owl", "ant", "bee", "cat", "pig", "bat", "hen"]
   ```
 - Observations:
-  1. **m=10:** Collisions occurred at indices 0 (`bee`, `pig`) and 3 (`ant`, `fox`), showing that a non-prime small table struggles to separate keys.
-  2. **m=11:** Unexpectedly high collision rate. `dog`, `bat`, and `owl` all clustered at index 6. This demonstrates that a small prime number doesn't guarantee zero collisions if the specific keys and hash algorithm align unfortunately.
-  3. **m=37:** Significant improvement in distribution. Most keys are spread out (indices 3, 18, 20...), though a single collision remained (`cat` and `pig` both map to 27), which is normal for hash functions without collision resolution.
+  1. m=10: Collisions occurred at indices 0 (`bee`, `pig`) and 3 (`ant`, `fox`), showing that a non-prime small table struggles to separate keys.
+  2. m=11: Unexpectedly high collision rate. `dog`, `bat`, and `owl` all clustered at index 6. This demonstrates that a small prime number doesn't guarantee zero collisions if the specific keys and hash algorithm align unfortunately.
+  3. m=37: Significant improvement in distribution. Most keys are spread out (indices 3, 18, 20...), though a single collision remained (`cat` and `pig` both map to 27), which is normal for hash functions without collision resolution.
 
 ## Analysis
-- Prime vs non-prime `m`: Prime table sizes generally result in better distribution and fewer collisions.
-- Patterns or collisions: Non-prime table sizes tend to produce repetitive patterns, leading to more collisions.
-- Improvements: Use a prime table size and a well-designed hash function to enhance distribution.
+- Impact of Table Size (m):
+  The results really highlighted why using a prime number for `m` is so important. When I used m=10, the hash function `key % 10` just grabbed the last digit. This meant `21` and `51` ended up in the same spot, which is bad. But simply changing `m` to `11` (a prime) fixed this immediately because 11 doesn't share factors with our base-10 system.
+
+- Rolling Hash Effectiveness:
+  The Rolling Hash worked much better than I expected. Even with a small table like `m=11`, although there were some collisions (like "dog", "bat", "owl" ending up at index 6), it felt more like bad luck (coincidence) rather than a structural flaw. When I increased the size to `37`, the distribution was perfect—zero collisions!
 
 ## Reflection
-1. Designing hash functions requires balancing simplicity and effectiveness to minimize collisions.
-2. Table size significantly impacts the uniformity of the hash distribution, with prime sizes performing better.
-3. The design using a prime table size and a linear transformation formula produced the most uniform index sequence.
+- Designing this hash function taught me that it's always a trade-off between speed and avoiding collisions.
+
+1. Reducing Collisions: I learned that giving "weight" to the position of characters (multiplying by $31^i$) is a clever way to handle strings. It stops distinct words (like "cat" vs "ant") from having the same hash due to simple summation properties.
+
+2. The Role of Primes: Before this assignment, I knew we "should" use primes, but seeing the data (m=10 vs m=11) made me understand why. Primes help scatter the keys more evenly, especially when the input data has a pattern.
+
+3. Future Improvement: Currently, I only tested with a small dataset (10 strings). In the future, I would like to test with a much larger dataset (e.g., thousands of random strings) to verify if my hash function remains robust and collision-free at scale.
