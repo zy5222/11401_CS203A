@@ -263,8 +263,6 @@ IDE: VS Code
   pig     0
   fox     3
 
-   Output for strings:
-
   === String Hash (m = 11) ===
   Key     Index
   -----------------
@@ -294,6 +292,7 @@ IDE: VS Code
   fox     18
   ```
 - Observations: 
+
   1. m=10 (High Pattern Correlation): The index sequence `1, 2, 3...0` repeats perfectly for both the 20s and 50s range. This confirms that `key % 10` simply extracts the last digit, causing 100% collision for inputs with the same ending digit (e.g., 21 and 51).
   2. m=11 & 37 (Pattern Breaking): Using a prime number successfully breaks this pattern. For `m=11`, 21 maps to 10 while 51 maps to 7, showing distinct indices. `m=37` offers the widest distribution with no collisions in this dataset.
 
@@ -310,6 +309,7 @@ IDE: VS Code
   Hash table (m=37): ["dog", "fox", "cow", "owl", "ant", "bee", "cat", "pig", "bat", "hen"]
   ```
 - Observations:
+
   1. m=10: Collisions occurred at indices 0 (`bee`, `pig`) and 3 (`ant`, `fox`), showing that a non-prime small table struggles to separate keys.
   2. m=11: Unexpectedly high collision rate. `dog`, `bat`, and `owl` all clustered at index 6. This demonstrates that a small prime number doesn't guarantee zero collisions if the specific keys and hash algorithm align unfortunately.
   3. m=37: Significant improvement in distribution. Most keys are spread out (indices 3, 18, 20...), though a single collision remained (`cat` and `pig` both map to 27), which is normal for hash functions without collision resolution.
