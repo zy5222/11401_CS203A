@@ -72,3 +72,24 @@ To ensure the correct compiler was used, I used the absolute path for compilatio
 & "C:\msys64\ucrt64\bin\gcc.exe" C/main.c C/hash_fn.c -o hash_function
 & "C:\msys64\ucrt64\bin\g++.exe" CXX/main.cpp CXX/hash_fn.cpp -o hash_function_cpp
 ```
+## Assistive Tools
+I utilized Artificial Intelligence (**Google Gemini**) to assist with the development of Assignment IV. The AI served as a technical assistant to overcome specific platform-related challenges and refine the project structure. 
+
+Below is a summary of the assistance provided:
+### 1.Environment Configuration & Troubleshooting
+- Compiler Path Resolution: Diagnosed a `Fatal error: can't create C:\Users\芷芸\...` issue caused by Chinese characters in the Windows user path.
+- Solution: Provided the PowerShell commands to redirect temporary directories (`$env:TMP`) to a safe path (`C:\tmp`), enabling successful compilation via MinGW.
+### 2. Build Automation (Windows)
+- **Custom Build Script**: Assisted in creating `Makefile.bat` to mimic GNU Make functionality on Windows.
+- **Logic Fixes**: Corrected batch script logic (using `EXIT /B`) to ensure sequential compilation of both C and C++ targets.
+- **Compatibility Adjustments**: Identified `unrecognized command line option` errors and advised downgrading compiler standards from `C23/C++23` to `C11/C++17` to match the installed MinGW version.
+### 3. Code Implementation & Review
+- **Hash Algorithms**: Verified the mathematical logic for the Division Method (`(key) % m`) and Polynomial Rolling Hash (using prime `P=31`).
+- **Header Management**: Fixed linker errors caused by incorrect `#include` statements (changing `.c` includes to `.h`).
+- **Edge Case Handling**: Suggested adding safety checks for `m <= 0` and empty strings.
+### 4. Data Analysis & Documentation
+- **Verification**: Verified that the experimental data (e.g.,` m=37 `indices starting at 21) aligned with the source code logic, ensuring the report reflected actual execution results rather than generic examples.
+- **Collision Analysis**: Helped articulate the trade-offs between speed and collision resistance, and explained the mathematical significance of using prime numbers for table sizes.
+### 5. Version Control
+- **Git Workflow**: Guided the creation of a clean commit history (Initial -> Development -> Final) and resolved `non-fast-forward` push errors.
+- **Cleanup**: Generated a `.gitignore` file to properly exclude build artifacts (`.exe`,` .o`) and IDE settings (`.vs/`).
