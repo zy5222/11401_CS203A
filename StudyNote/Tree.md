@@ -36,8 +36,11 @@
 | **AVL Tree** |  It is a self-balancing Binary Search Tree. It enforces a strict condition where the difference in height between the left and right subtrees of any node (called the balance factor) must be no more than 1. If this property is violated during modification, the tree performs rotations to rebalance itself.|h|**Red-Black Tree** | It is a self-balancing Binary Search Tree where each node stores an extra bit representing a color (red or black). It uses specific rules (e.g., the root is black, red nodes cannot have red children) to ensure the longest path from the root to a leaf is no more than twice as long as the shortest path, guaranteeing O(log n) search time.|
 |**Max Heap** |It is a specific type of complete binary tree that satisfies the heap property: the value of every parent node is greater than or equal to the values of its children. Consequently, the largest element is always found at the root.|
 |**Min Heap**|It is a specific type of complete binary tree that satisfies the heap property: the value of every parent node is less than or equal to the values of its children. Therefore, the smallest element is always located at the root.|
-|# Type of Binary Trees
-simg width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/ac82f0f1-f953-4e49-8470-d2d11f188440" " 
+
+# Type of Binary Trees
+
+<img width="800" height="600" alt="image" src="https://github.com/user-attachments/assets/ac82f0f1-f953-4e49-8470-d2d11f188440"  />
+
 *Image source: Course Lecture Slides, Chapter 12.*
 
 - **Strict:** Every node has either 0 or 2 children. No node has just 1 child.
