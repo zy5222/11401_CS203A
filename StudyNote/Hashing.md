@@ -1,10 +1,11 @@
 # Hash Table
 
 ## Definition
-- Hashing 是一種資料結構技術，它使用「雜湊函數 (Hash Function)」將「Key」轉換為陣列中的「索引 (Index/Bucket)」，以存儲「鍵值對 (Key-Value Pairs)」
-- 它解決了在大量數據中快速尋找資料的問題，無需掃描整個列表，實現了平均常數時間 `O(1)` 的搜尋效率。
+- Hashing is a data structure technique that uses a hash function to convert a key into an index (or bucket) within an array to store key-value pairs.
+- It solves the problem of efficiently retrieving data from large datasets without scanning the entire list, achieving an average constant-time complexity `O(1)` for search operations.
 ## Visualization
-- **Chaining**:
+
+- **Chaining**: Uses a Linked List at each bucket to store multiple items that hash to the same index.
   ```text
   Index
   +---+
@@ -16,7 +17,7 @@
   +---+      +------+    +------+    +------+
   | 4 |
   +---+
-- **Linear Probing**:
+- **Linear Probing**: Everything is stored in the array itself. If a spot is taken, find the next open spot.
   ```text
   Hash Table (Linear Probing)
   ===========================
@@ -32,6 +33,23 @@
     5   |        |
     6   |        |
     ```
+
+## Collision Resolution
+Since the universe of keys is larger than our table size, **Collisions** (two keys hashing to the same index) are inevitable.
+- **Separate Chaining**:
+  - Mechanism: Each bucket stores a pointer to a Linked List.
+  - Pros: Simple; performance degrades gracefully (linearly) as the table fills.
+  - Cons: Uses extra memory for pointers; creating new nodes requires memory allocation.
+- **Open Addressing**:
+  - Stores all elements in the array. Requires a Probing Sequence to find an empty slot.
+    
+| Method | Formula | Description & Issue |
+| :--- | :--- | :--- |
+| **Linear Probing** | $(h(k) + i) \% m$ | Checks next slot (+1, +2...). Causes **Primary Clustering** (blocks of occupied slots grow larger). |
+| **Quadratic Probing** | $(h(k) + c_1 i + c_2 i^2) \% m$ | Jumps by squares (+1, +4, +9...). Reduces primary clustering but can cause **Secondary Clustering**. |
+| **Double Hashing** | $(h_1(k) + i \cdot h_2(k)) \% m$ | Uses a **second hash function** for the step size. Best distribution; minimal clustering. |
+    
+
 ## Characteristics
 - Ordering:
   
@@ -40,9 +58,14 @@
 - Indexing:
   - **Computed Indexing**: It is inherently index-based (using an array), but the index is computed from the key using a **Hash Function** `(Key -> Index)`.
 
-- Key Uniqueness(allows duplicate?):
-  - **Keys must be unique**: No two pairs have the same key.
+- Key Uniqueness:
+  - **Keys must be unique**: No two pairs have the same key.(values can be duplicated)
   - **Collisions are allowed**: Multiple different keys can map to the same index (Collision), which must be handled via Chaining or Open Addressing.
+    
+- Load Factor ($\alpha$):
+  - Formula: $\alpha = \frac{n \text{ (number of elements)}}{m \text{ (table size)}}$
+  - Significance: Measures how full the table is.
+  - Threshold: when **$\alpha > 0.75$**, the table must **resize**
 
 - Dynamic size:
   - **Dynamic Hashing**: The table can grow or shrink automatically when the load factor (α) exceeds a threshold (e.g., resize when full).
@@ -54,11 +77,14 @@
     - **Chaining**: Uses Pointers (Linked Lists) for collisions, which are non-contiguous.
     - **Open Addressing**: Uses purely contiguous memory (Entire Array).
 
-- Typical operations:(需重新查看)
+- Typical operations:
+  - **Create(size)**: Initializes an empty hash table with a specified number of buckets `(m)`.
   - **Insert(key, value)**: Adds a new key-value pair to the table. If the key already exists, it typically updates the value.
-  - **Search(key) / Retrieve(key)**: Finds and returns the item (value) associated with the given key.
+  - **Retrieve(key)**: Finds and returns the **value** associated with the specific key. Throws an exception or returns null if not found.
+  - **Search(key)**: Checks if a key exists in the table and returns a Boolean (TRUE/FALSE).
   - **Delete(key)**: Removes the key-value pair associated with the specific key from the table.
-  - **IsEmpty()**: Checks whether the table contains no elements.
+  - **Traverse()**: Returns an iterator to visit all key-value pairs in the table (typically iterating through buckets).
+  - **IsEmpty()**: Checks whether the table contains no elements(size is 0).
   
 ## Time/Space Complexity
 | Operation | Time (Average) | Description |
@@ -81,9 +107,9 @@
   
 - **Static Sizing**: Static hash tables have a fixed size. They perform poorly or fail when the dataset grows unexpectedly large, requiring expensive resizing operations.
   
-## Pros/Cons
+## Pros, Cons & Trade-offs
 - Pros
-  - **Fast Retrieval (快速存取)**: Provides average constant-time complexity (O(1)) for insertion, deletion, and search operations.
+  - **Fast Retrieval**: Provides average constant-time complexity (O(1)) for insertion, deletion, and search operations.
   
   - **Efficiency**: Eliminates unnecessary search candidates early, making it ideal for quick lookups compared to scanning an entire list.
     
@@ -91,13 +117,12 @@
     
 - Cons
   - **Collisions**: Unavoidable; requires handling techniques like Chaining or Open Addressing, which adds complexity.
-  - **Performance Degradation (效能下降)**:
+  - **Performance Degradation**:
     - In the worst case (many collisions), performance drops to O(n).
     - **Clustering** (in open addressing) can cause "traffic jams," slowing down insertions and searches as the table gets full.
   - **Unordered**: Data is not stored in any logical order (like numerical or alphabetical), making range queries (e.g., "find all items > 100") difficult.
  
-- When to Use vs. When Not to Use
-  
+- When to Use?
   | Scenario | Decision | Reason |
   | :--- | :--- | :--- |
   | **Exact Match Lookups** | ✅ **Use** | Best for finding a specific item by a unique key (e.g., Dictionary, Student ID). |
@@ -126,3 +151,9 @@
   - **Key:** Student ID
   - **Value:** Student Record (Name, Courses, Grades)
 - **Benefit:** Enables direct access to a specific student's file in constant time.
+  
+## Basic Exercises on Hash Table Concepts (QUIZ III)
+<img width="1144" height="843" alt="image" src="https://github.com/user-attachments/assets/590b7e6e-cf7f-4a18-9178-a42669742e6b" />
+
+## Note:
+- This study note is based on the CS203A lecture slides and was summarized and formatted with the assistance of Google Gemini.
