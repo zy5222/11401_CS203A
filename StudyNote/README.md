@@ -17,7 +17,7 @@ Fundamental structures where data elements are arranged sequentially.
 
 | Topic | Key Concepts & Highlights | Link |
 | :--- | :--- | :--- |
-| **Arrays** | • Static vs. Dynamic Memory (`malloc`/`realloc`)<br>• STL `std::vector` vs. `std::array`<br>• Sorting & Searching Basics | [View Note](StudyNote/Array.md) |
+| **Arrays** | • Static vs. Dynamic Memory (`malloc`/`realloc`)<br>• STL `std::vector` vs. `std::array`<br>• Sorting & Searching Basics | [View Note](https://github.com/zy5222/11401_CS203A/blob/main/StudyNote/Array.md)) |
 | **Linked Lists** | • Singly, Doubly, & Circular Lists<br>• Pointer Manipulation & Memory Management<br>• **Comparison**: Array vs. Linked List | [View Note](./LinkedLists.md) |
 | **Stacks & Queues** | • LIFO vs. FIFO Principles<br>• Implementation (Array vs. Linked List)<br>• Circular Queue Logic & Applications | [View Note](./Stacks_Queues.md) |
 
