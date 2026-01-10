@@ -95,5 +95,5 @@ Task: For each tree type below, construct the tree using these integers, take a 
 - Description: I constructed the Min Heap by inserting the integers one by one. After each insertion, the **Sift-Up** operation was performed to maintain the heap property. This involves swapping the new node with its parent if the child is smaller than the parent. This process ensures the Min Heap property (**Parent ≤ Child**) is preserved, resulting in the smallest element (5) located at the root.
 - Screenshot of Min Heap: <img width="988" height="406" alt="image" src="https://github.com/user-attachments/assets/c8a0545c-f974-4f14-9b47-9a10ad5e0785" />
 
-## Note:
+## Note
 - This study note is based on the CS203A lecture slides and was summarized and formatted with the assistance of Google Gemini.
