@@ -29,7 +29,7 @@ Advanced structures for complex relationships and efficient retrieval.
 |**Tree** | • Binary Trees, BST, & AVL Trees<br>• Traversal Algorithms (Pre-order, In-order, Post-order)<br>• Tree Height & Depth Analysis | [View Note](https://github.com/zy5222/11401_CS203A/blob/main/StudyNote/Tree.md) |
 | **Heap** | • Max Heap vs. Min Heap<br>• Priority Queue Implementation<br>• Heap Sort & Array Representation | [View Note](https://github.com/zy5222/11401_CS203A/blob/main/StudyNote/Heap.md) |
 | **Graph** | • Adjacency Matrix vs. Adjacency List<br>• Traversal Algorithms: BFS (Queue) vs. DFS (Stack)<br>• **Comparison**: Tree vs. Graph | [View Note](https://github.com/zy5222/11401_CS203A/blob/main/StudyNote/Graph.md)|
-| **HashTable** | • Hash Functions & Indexing<br>• Collision Resolution (Chaining vs. Open Addressing)<br>• Load Factor & Resizing | [View Note](https://github.com/zy5222/11401_CS203A/blob/main/StudyNote/Hashing.md) |
+| **HashTable** | • Hash Functions & Indexing<br>• Collision Resolution (Chaining vs. Open Addressing)<br>• Load Factor & Resizing | [View Note](https://github.com/zy5222/11401_CS203A/blob/main/StudyNote/HashTable.md) |
 
 ##  Key Comparisons
 Quick reference for major trade-offs discussed in the notes.
