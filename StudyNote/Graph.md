@@ -1,4 +1,4 @@
-# Graphs 
+# Graph
 
 ## Introduction & Definitions
 - A **Graph** is a non-linear data structure consisting of **Vertices** (nodes) and **Edges** (links) used to model relationships between objects, such as social networks, transportation systems, or web pages.
