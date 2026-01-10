@@ -80,7 +80,7 @@ Heap operations must maintain the Complete Binary Tree shape first, then fix the
 ## Time Complexity
 | Operation | Time (Average) | Description | why? |
 | :--- | :--- | :--- | :--- |
-| **peek_root** |  O(1)  | Access max/min element 存取最大/最小值| Root is at index 0|
+| **peek_root** |  O(1)  | Access max/min element | Root is at index 0|
 | **insert(x)** |  O(log n)  | Add element (Sift-up)| Moves leaf -> root (height)|
 | **extract root()** |  O(log n)  | Remove max/min (Sift-down)| Moves root -> leaf (height)|
 | **build heap** |  O(n)  | Convert array to heap| More efficient than n insertions |
@@ -91,3 +91,6 @@ Heap operations must maintain the Complete Binary Tree shape first, then fix the
 - **Storage**: Array (most efficient).
 - **Typical Uses**: Priority Queue, Scheduling, Heapsort.
 - **Performance**: Logarithmic insertion and removal (O(log n)).
+
+## Note
+- This study note is based on the CS203A lecture slides and was summarized and formatted with the assistance of Google Gemini.
