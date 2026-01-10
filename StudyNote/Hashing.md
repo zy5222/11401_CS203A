@@ -155,5 +155,5 @@ Since the universe of keys is larger than our table size, **Collisions** (two ke
 ## Basic Exercises on Hash Table Concepts (QUIZ III)
 <img width="1144" height="843" alt="image" src="https://github.com/user-attachments/assets/590b7e6e-cf7f-4a18-9178-a42669742e6b" />
 
-## Note:
+## Note
 - This study note is based on the CS203A lecture slides and was summarized and formatted with the assistance of Google Gemini.
